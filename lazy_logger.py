@@ -29,28 +29,13 @@ def _fake_print_generator(logger):
 
     return _fake_print
 
-
-class _fake_print_generator():
-  
-    def __init__(self, logger):
-        self.logger = logger
-
-    def out(self, *args, file=None, **kwargs):
-        if file is None:
-            self.logger.debug(*args, **kwargs)
-        else:
-            _real_print(*args, file=file, **kwargs)
-
-
 @monkeypatch_method(logging.Logger)
 def patch(self, f):
     @functools.wraps(f)
     def patched(*args, **kwargs):
         import builtins
-        #builtins.print = _fake_print_generator(logger=self)
-        #builtins.print = _fake_print
-        _fake_print = _fake_print_generator(logger=self)
-        builtins.print = _fake_print.out
+        builtins.print = _fake_print_generator(logger=self)
+        
         try:
             f(*args, **kwargs)
         finally:
