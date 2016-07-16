@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Python-Logging-For-Human/ezlogging.svg?branch=master)](https://travis-ci.org/Python-Logging-For-Human/ezlogging)
+
 # ezlogging
 
 ezlogging
