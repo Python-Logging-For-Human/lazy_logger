@@ -30,6 +30,8 @@ logger = lazy_logger.get_logger()
 
 lazy_logger.log_to_console(logger)
 
+lazy_logger.log_to_rotated_file(logger)
+
 @logger.patch
 def main():
     print('Hello World!')
@@ -39,6 +41,10 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+
++ `log_to_console()`: Setting logger and auto transfer data to stderr
++ `log_to_rotated_file()`: Setting logger and can save the data to file (default: log.out), and can rotate at same time.
++ `log_to_syslogd():` setting logger and can transfer data to sysemd.
 
 # test
 py.test --capture=sys
