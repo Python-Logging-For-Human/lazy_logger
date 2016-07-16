@@ -2,7 +2,7 @@
 
 # lazy_logger
 
-__lazy_logger__ is a tool help you to easily use python's `logging` module by python's `print` function.
+__lazy_logger__ is a tool help you to easily use Python's `logging` module by Python's `print` function.
 
 ## Quick start
 
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     main()
 ```
 
-+ `log_to_console()`: Setting logger and auto transfer data to stderr
++ `log_to_console()`: Setting logger and auto transfer data to stderr.
 + `log_to_rotated_file()`: Setting logger and can save the data to file (default: log.out), and can rotate at same time.
 + `log_to_syslogd():` Setting logger and can transfer data to sysemd.
 
