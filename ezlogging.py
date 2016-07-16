@@ -72,7 +72,8 @@ def main():
     logger.debug('yo')  # should be show up in terminal
 
     log_to_rotated_file(logger)
-    logger.debug('yoyo')  # should be show up in terminal
+    logger.debug('yoyo')  #  your will see a file in your file system
+
 
 if __name__ == "__main__":
     main()
