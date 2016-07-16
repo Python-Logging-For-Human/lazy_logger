@@ -17,38 +17,46 @@ def _fake_print(*args, file=None, **kwargs):
     else:
         _real_print(*args, file=file, **kwargs)
 
+
 @monkeypatch_method(logging.Logger)
 def patch(self, f):
 
-    @functools.wraps(f)
-    def patched(*args, **kwargs):
-        import builtins
-        builtins.print = _fake_print
-        try:
-            f(*args, **kwargs)
-        finally:
-            builtins.print = _real_print
+        @functools.wraps(f)
+        def patched(*args, **kwargs):
+            import builtins
+            builtins.print = _fake_print
+            try:
+                f(*args, **kwargs)
+            finally:
+                builtins.print = _real_print
 
-    return patched
+        return patched
 
-# class Logger:
+
+def get_logger():
+    return logging.getLogger(__name__)
+
+
+#class Logger(logging.Logger):
+#    
+#    def __init__(self, *args, **kwargs):
+#        super(Logger, self).__init__(*args, **kwargs)
 #
-#     def patch(self, f):
+#    def patch(self, f):
 #
-#         @functools.wraps(f)
-#         def patched(*args, **kwargs):
-#             import builtins
-#             builtins.print = _fake_print
-#             try:
-#                 f(*args, **kwargs)
-#             finally:
-#                 builtins.print = _real_print
+#        @functools.wraps(f)
+#        def patched(*args, **kwargs):
+#            import builtins
+#            builtins.print = _fake_print
+#            try:
+#                f(*args, **kwargs)
+#            finally:
+#                builtins.print = _real_print
 #
-#         return patched
+#        return patched
 
 
-logger = logging.getLogger()
-
+logger = get_logger()
 
 @logger.patch
 def main():
