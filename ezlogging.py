@@ -18,19 +18,22 @@ def monkeypatch_method(cls):
         return func
     return decorator
 
-def _fake_print(*args, file=None, **kwargs):
-    if file is None:
-        _real_print('Logger!__ program.py __: ', *args, **kwargs)
-    else:
-        _real_print(*args, file=file, **kwargs)
+def _fake_print_generator(logger):
+
+    def _fake_print(*args, file=None, **kwargs):
+        if file is None:
+            logger.debug(*args, **kwargs)
+        else:
+            _real_print(*args, file=file, **kwargs)
+
+    return _fake_print
 
 @monkeypatch_method(logging.Logger)
 def patch(self, f):
-
     @functools.wraps(f)
     def patched(*args, **kwargs):
         import builtins
-        builtins.print = _fake_print
+        builtins.print = _fake_print_generator(logger=self)
         try:
             f(*args, **kwargs)
         finally:
