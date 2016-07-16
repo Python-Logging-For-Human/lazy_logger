@@ -116,12 +116,14 @@ def log_to_syslogd(logger=root_logger,
 def main():
 
     logger = get_logger(__name__)
-    log_to_console(logger, logger_level=logging.CRITICAL)
+    log_to_console(logger)
     logger.debug('yo')  # should be show up in terminal
 
-    log_to_rotated_file(logger)
-    logger.debug('yoyo')  # your will see a file in your file system
+    @logger.patch
+    def show():
+        print("message in show")
 
+    show()
 
 if __name__ == "__main__":
     main()
