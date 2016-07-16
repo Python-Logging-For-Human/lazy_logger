@@ -60,9 +60,26 @@ def log_to_rotated_file(logger=root_logger,
     handler.setFormatter(formatter)
 
     logger.addHandler(handler)
+    return logger
 
 
-def log_to_syslogd(logger): pass
+def log_to_syslogd(logger=root_logger,
+                   address=None,
+                   logger_level=LOGGER_LEVEL,
+                   handler_level=HANDLER_LEVEL,
+                   logging_format=FORMAT
+                   ):
+
+    assert address
+
+    logger.setLevel(logger_level)
+
+    handler = logging.handlers.SysLogHandler(address = address)
+    handler.setLevel(handler_level)
+
+    formatter = logging.Formatter(logging_format)
+    handler.setFormatter(formatter)
+    return logger
 
 
 def main():
@@ -72,7 +89,7 @@ def main():
     logger.debug('yo')  # should be show up in terminal
 
     log_to_rotated_file(logger)
-    logger.debug('yoyo')  #  your will see a file in your file system
+    logger.debug('yoyo')  # your will see a file in your file system
 
 
 if __name__ == "__main__":
