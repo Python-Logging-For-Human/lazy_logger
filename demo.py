@@ -3,6 +3,8 @@ import sys
 
 logger = ezlogging.get_logger()
 
+ezlogging.log_to_console(logger)
+
 @logger.patch
 def main():
     print('Hello World!')
