@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
 
     name='lazy_logger',
-    version="0.1.0",
+    version="0.1.1",
     description='provide a better logging',
     long_description=open('README.md').read(),
     author='lazy_logger',
