@@ -2,7 +2,7 @@
 
 # lazy_logger
 
-__lazy_logger__ is a tool help you to easily use python's `logging` module by python's print.
+__lazy_logger__ is a tool help you to easily use python's `logging` module by python's `print` function.
 
 ## Quick start
 
