@@ -44,7 +44,7 @@ if __name__ == '__main__':
 
 + `log_to_console()`: Setting logger and auto transfer data to stderr
 + `log_to_rotated_file()`: Setting logger and can save the data to file (default: log.out), and can rotate at same time.
-+ `log_to_syslogd():` setting logger and can transfer data to sysemd.
++ `log_to_syslogd():` Setting logger and can transfer data to sysemd.
 
 # test
 py.test --capture=sys
@@ -52,7 +52,7 @@ py.test --capture=sys
 
 # Thanks the contributions
 
-+ Tim(@tim)
-+ Wende(@WendellLiu)
-+ Jack(@jackklpan)
++ tim(@timtan)
++ WendellLiu(@WendellLiu)
++ jackpan(@jackklpan)
 + Jason(@chairco)
