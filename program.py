@@ -1,9 +1,15 @@
 import functools
 import sys
-
+import logging
 
 _real_print = print
 
+
+def monkeypatch_method(cls):
+    def decorator(func):
+        setattr(cls, func.__name__, func)
+        return func
+    return decorator
 
 def _fake_print(*args, file=None, **kwargs):
     if file is None:
@@ -11,23 +17,37 @@ def _fake_print(*args, file=None, **kwargs):
     else:
         _real_print(*args, file=file, **kwargs)
 
+@monkeypatch_method(logging.Logger)
+def patch(self, f):
 
-class Logger:
-    def patch(self, f):
+    @functools.wraps(f)
+    def patched(*args, **kwargs):
+        import builtins
+        builtins.print = _fake_print
+        try:
+            f(*args, **kwargs)
+        finally:
+            builtins.print = _real_print
 
-        @functools.wraps(f)
-        def patched(*args, **kwargs):
-            import builtins
-            builtins.print = _fake_print
-            try:
-                f(*args, **kwargs)
-            finally:
-                builtins.print = _real_print
+    return patched
 
-        return patched
+# class Logger:
+#
+#     def patch(self, f):
+#
+#         @functools.wraps(f)
+#         def patched(*args, **kwargs):
+#             import builtins
+#             builtins.print = _fake_print
+#             try:
+#                 f(*args, **kwargs)
+#             finally:
+#                 builtins.print = _real_print
+#
+#         return patched
 
 
-logger = Logger()
+logger = logging.getLogger()
 
 
 @logger.patch

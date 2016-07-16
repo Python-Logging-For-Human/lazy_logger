@@ -1,5 +1,7 @@
 import logging
 import logging.handlers
+import functools
+
 
 FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 LOGGER_LEVEL = logging.DEBUG
@@ -7,8 +9,37 @@ HANDLER_LEVEL = logging.DEBUG
 
 root_logger = logging.getLogger()
 
+_real_print = print
 
-def get_logger(name):
+
+def monkeypatch_method(cls):
+    def decorator(func):
+        setattr(cls, func.__name__, func)
+        return func
+    return decorator
+
+def _fake_print(*args, file=None, **kwargs):
+    if file is None:
+        _real_print('Logger!__ program.py __: ', *args, **kwargs)
+    else:
+        _real_print(*args, file=file, **kwargs)
+
+@monkeypatch_method(logging.Logger)
+def patch(self, f):
+
+    @functools.wraps(f)
+    def patched(*args, **kwargs):
+        import builtins
+        builtins.print = _fake_print
+        try:
+            f(*args, **kwargs)
+        finally:
+            builtins.print = _real_print
+
+    return patched
+
+
+def get_logger(name=None):
     return logging.getLogger(name)
 
 
