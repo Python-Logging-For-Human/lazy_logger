@@ -115,8 +115,10 @@ def log_to_syslogd(logger=root_logger,
 
 def main():
 
-    logger = get_logger(__name__)
+    logger = get_logger('test')
+
     log_to_console(logger)
+
     logger.debug('yo')  # should be show up in terminal
 
     @logger.patch
