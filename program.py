@@ -1,6 +1,6 @@
 import functools
 import sys
-
+import logging
 
 _real_print = print
 
@@ -12,7 +12,11 @@ def _fake_print(*args, file=None, **kwargs):
         _real_print(*args, file=file, **kwargs)
 
 
-class Logger:
+class Logger(logging.Logger):
+    
+    def __init__(self, *args, **kwargs):
+        super(Logger, self).__init__(*args, **kwargs)
+
     def patch(self, f):
 
         @functools.wraps(f)
@@ -27,7 +31,7 @@ class Logger:
         return patched
 
 
-logger = Logger()
+logger = Logger('name')
 
 
 @logger.patch
