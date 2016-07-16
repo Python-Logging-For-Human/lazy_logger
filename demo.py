@@ -1,9 +1,9 @@
-import ezlogging
+import lazy_logger
 import sys
 
-logger = ezlogging.get_logger()
+logger = lazy_logger.get_logger()
 
-ezlogging.log_to_console(logger)
+lazy_logger.log_to_console(logger)
 
 @logger.patch
 def main():
