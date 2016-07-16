@@ -29,10 +29,13 @@ def log_to_console(logger,
 def log_to_rotated_file(logger): pass
 
 
-def log_to_systemd(logger): pass
+def log_to_syslogd(logger): pass
 
 
 if __name__ == "__main__":
+
     logger = get_logger(__name__)
+
     logger = log_to_console(logger)
-    logger.debug('yo')
+
+    logger.debug('yo')  # should be show up in terminal
