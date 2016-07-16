@@ -5,11 +5,11 @@ from setuptools import setup, find_packages
 
 setup(
 
-    name='easy_logging',
+    name='lazy_logger',
     version="0.1.0",
     description='provide a better logging',
     long_description=open('README.md').read(),
-    author='easy_logging',
+    author='lazy_logger',
     url='https://github.com/Python-Logging-For-Human/ezlogging',
     author_email='tim.yellow@gmail.com',
     license='MIT',
@@ -24,7 +24,7 @@ setup(
         'Topic :: Utilities',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
-    py_modules=['easy_logging'],
+    py_modules=['lazy_logger'],
 
 
 )

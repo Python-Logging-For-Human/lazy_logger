@@ -1,10 +1,10 @@
-import ezlogging as ezlogging
+import lazy_logger
 import time
 
 
 def test_log_to_console(capsys):
-    logger = ezlogging.get_logger('noname')
-    ezlogging.log_to_console(logger)
+    logger = lazy_logger.get_logger('noname')
+    lazy_logger.log_to_console(logger)
     logger.debug('yo')
 
     out, err = capsys.readouterr()
@@ -13,9 +13,9 @@ def test_log_to_console(capsys):
 
 
 def test_log_to_rotated_file(tmpdir):
-    logger = ezlogging.get_logger('noname')
-    file_path = tmpdir.join(ezlogging.FILE_NAME).strpath
-    ezlogging.log_to_rotated_file(logger, ezlogging.LOGGER_LEVEL, ezlogging.HANDLER_LEVEL,
+    logger = lazy_logger.get_logger('noname')
+    file_path = tmpdir.join(lazy_logger.FILE_NAME).strpath
+    lazy_logger.log_to_rotated_file(logger, lazy_logger.LOGGER_LEVEL, lazy_logger.HANDLER_LEVEL,
         '%(message)s', 100, file_path)
     logger.debug('y'*100)
     logger.debug('y')
