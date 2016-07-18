@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Python-Logging-For-Human/ezlogging.svg?branch=master)](https://travis-ci.org/Python-Logging-For-Human/ezlogging)
+[![Build Status](https://travis-ci.org/Python-Logging-For-Human/lazy_logger.svg?branch=master)](https://travis-ci.org/Python-Logging-For-Human/lazy_logger)
 
 # lazy_logger
 
