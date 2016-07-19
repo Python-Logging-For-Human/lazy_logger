@@ -9,9 +9,9 @@ lazy_logger.log_to_rotated_file(logger) # create log file log.out
 
 @logger.patch
 def main():
-    print('Hello World!')
+    print('Hello World!') # expect acting as logger
 
-    print('Hello stdout!', file=sys.stdout)
+    print('Hello stdout!', file=sys.stdout) # expect acting as normal print
 
 if __name__ == '__main__':
     main()
