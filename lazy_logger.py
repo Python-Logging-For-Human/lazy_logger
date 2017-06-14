@@ -20,14 +20,13 @@ def monkeypatch_method(cls):
 
 
 def _fake_print_generator(logger):
-
     def _fake_print(*args, file=None, **kwargs):
         if file is None:
             logger.debug(*args, **kwargs)
         else:
             _real_print(*args, file=file, **kwargs)
-
     return _fake_print
+
 
 @monkeypatch_method(logging.Logger)
 def patch(self, f):
@@ -35,12 +34,11 @@ def patch(self, f):
     def patched(*args, **kwargs):
         import builtins
         builtins.print = _fake_print_generator(logger=self)
-        
         try:
-            f(*args, **kwargs)
+            result = f(*args, **kwargs)
         finally:
             builtins.print = _real_print
-
+        return result
     return patched
 
 
@@ -131,6 +129,7 @@ def main():
         print("message in show")
 
     show()
+
 
 if __name__ == "__main__":
     main()
